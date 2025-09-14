@@ -1,4 +1,16 @@
 (function () {
+    // Vercel Analytics Integration
+    function addVercelAnalytics() {
+        const script = document.createElement('script');
+        // This is the recommended Vercel Analytics script path
+        script.src = '/_vercel/insights/script.js';
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+
+    // Add Vercel Analytics to the page once the DOM is ready
+    document.addEventListener('DOMContentLoaded', addVercelAnalytics);
+
     // --- 1. DOM Elements (Optimized) ---
     const DOM = {
         themeToggle: document.getElementById('theme-toggle'),
