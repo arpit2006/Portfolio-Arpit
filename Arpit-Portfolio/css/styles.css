@@ -1,4 +1,4 @@
-/* CSS Variables for Theme - Already well-optimized */
+/* CSS Variables for Theme - No changes, this is already optimized */
 :root {
     --primary-color: #1e40af;
     --primary-dark: #1e3a8a;
@@ -1180,3 +1180,32 @@ section {
         justify-content: center;
     }
 }
+
+/* New CSS to fix the mobile layout issues */
+
+/* Fix for profile-card overlap */
+.profiles .profile-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-link {
+    margin-top: auto;
+}
+
+/* Ensure the nav toggle is styled correctly */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
+}
+
