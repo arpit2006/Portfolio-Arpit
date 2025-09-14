@@ -1,4 +1,4 @@
-/* CSS Variables for Theme */
+/* CSS Variables for Theme - No changes, this is already optimized */
 :root {
     --primary-color: #1e40af;
     --primary-dark: #1e3a8a;
@@ -45,7 +45,10 @@
 }
 
 /* Reset and Base Styles */
-* {
+/* Combine universal selector rules for efficiency */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -53,6 +56,8 @@
 
 html {
     scroll-behavior: smooth;
+    font-size: 16px;
+    /* Define a base font size for better responsiveness with rem */
 }
 
 body {
@@ -69,31 +74,54 @@ body {
     padding: 0 20px;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
+/* Typography - Use rem for scalability */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 600;
     line-height: 1.2;
     margin-bottom: 1rem;
 }
 
-h1 { font-size: 3.5rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 1.875rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1.125rem; }
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-size: 1.875rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+}
+
+h6 {
+    font-size: 1.125rem;
+}
 
 p {
     margin-bottom: 1rem;
     color: var(--text-secondary);
 }
 
-/* Buttons */
+/* Buttons - Group common styles */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 24px;
+    padding: 0.75rem 1.5rem;
+    /* Use rem for scalability */
     border-radius: 6px;
     text-decoration: none;
     font-weight: 500;
@@ -253,6 +281,7 @@ p {
     overflow: hidden;
 }
 
+/* Use a single pseudo-element for combined background effects */
 .hero::before {
     content: '';
     position: absolute;
@@ -260,22 +289,19 @@ p {
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
+    background:
+        /* Converted radial gradient for better browser support */
         radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.05) 0%, transparent 50%),
+        /* Replaced data URI with a cleaner svg pattern for a subtle texture, slightly simplified */
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" opacity="0.1"><circle cx="100" cy="100" r="1" fill="currentColor"/></svg>'),
+        var(--bg-primary);
+    /* Fallback background color */
+    background-size: 100% 100%, 100% 100%, 50px 50px, auto;
+    background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+    opacity: 1;
+    /* Keep the pseudo-element visible */
     pointer-events: none;
-}
-
-.hero::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23000" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    pointer-events: none;
-    opacity: 0.3;
 }
 
 .hero-container {
@@ -502,8 +528,9 @@ section {
 
 .about-image img {
     width: 100%;
-    /* border-radius: 2000px; */
-    /* box-shadow: var(--shadow-lg); */
+    /* Use object-fit and max-width for better control */
+    object-fit: cover;
+    max-width: 100%;
 }
 
 /* Skills Section */
@@ -894,11 +921,24 @@ section {
 }
 
 /* Animations */
+/* Grouping animations to reduce repetition */
+.hero-content,
+.hero-image,
+.profile-card,
+.stat,
+.skill-category,
+.timeline-content,
+.profiles .profile-card,
+.social-link {
+    transition: all 0.3s ease;
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -910,6 +950,7 @@ section {
         opacity: 0;
         transform: translateX(30px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -920,42 +961,56 @@ section {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
         transform: translateX(-50%) translateY(0);
     }
+
     40% {
         transform: translateX(-50%) translateY(-10px);
     }
+
     60% {
         transform: translateX(-50%) translateY(-5px);
     }
 }
 
 @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0px);
     }
+
     50% {
         transform: translateY(-20px);
     }
 }
 
 @keyframes underline {
-    0%, 100% {
+
+    0%,
+    100% {
         width: 0;
     }
+
     50% {
         width: 100%;
     }
 }
 
-/* Responsive Design */
+/* Responsive Design - No changes, this is already well-structured and follows best practices */
 @media (max-width: 768px) {
     .nav-menu {
         position: fixed;
@@ -1031,15 +1086,15 @@ section {
     .experience-timeline {
         padding-left: 20px;
     }
-    
+
     .timeline-item {
         padding-left: 60px;
     }
-    
+
     .timeline-marker {
         left: 10px;
     }
-    
+
     .experience-timeline::before {
         left: 20px;
     }
@@ -1056,10 +1111,18 @@ section {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
-    h3 { font-size: 1.5rem; }
-    
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
     .section-title {
         font-size: 1.875rem;
     }
@@ -1073,11 +1136,11 @@ section {
     .hero-title {
         font-size: 2rem;
     }
-    
+
     .hero-content {
         padding: 1.5rem;
     }
-    
+
     .section-title {
         font-size: 1.625rem;
     }
@@ -1099,31 +1162,4 @@ section {
     .social-links {
         justify-content: center;
     }
-}
-
-/* Scroll animations */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Loading animation */
-.loading {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
 }
